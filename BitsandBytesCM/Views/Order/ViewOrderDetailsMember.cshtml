@@ -27,7 +27,7 @@
 
                 <td>@orderDetails.ProductId</td>
                 <td>@orderDetails.Product.ProductDescription</td>
-                <td>@orderDetails.Quantity</td>
+                <td>@Html.ActionLink(orderDetails.Quantity.ToString(), "Edit", "Order", new { id = orderDetails.OrderDetailId }, null)</td>
                 <td>@orderDetails.UnitPrice</td>
             </tr>
         }

@@ -44,9 +44,9 @@ namespace BitsandBytesCM.Controllers
         public ActionResult ViewOrderDetails(int id)
         {
 
-            var orderDetails = _context.OrderDetails.Where(d => d.OrderId == id).Include(p => p.Product.ProductDescription);
-            var products = _context.Products;
-            List<string> productDescriptions;
+            var orderDetails = _context.OrderDetails.Where(d => d.OrderId == id);
+            //var products = _context.Products;
+            //List<string> productDescriptions;
             //List<OrderDetail> productDescriptions = _context.OrderDetails.Where(d => d.OrderId == id).Select()
             /*
             foreach (var detail in orderDetails)
@@ -67,21 +67,21 @@ namespace BitsandBytesCM.Controllers
                 }
             }*/
             //Set up ViewModel
-            var viewModel = new OrderDetailsViewModel();
+            //var viewModel = new OrderDetailsViewModel();
 
 
-            viewModel.OrderDetails = orderDetails.Include(p => p.Product.ProductDescription).ToList();
+            //viewModel.OrderDetails = orderDetails.Include(p => p.Product.ProductDescription).ToList();
             //viewModel.ProductDetails = 
 
             
                
-            return View(viewModel);
+            return View(orderDetails);
         }
 
         //add in .where as users should onlhy be able to see their own orders.
         public ActionResult ViewOrdersMember()
         {
-
+            //Make it check for matching Id
             var orders = _context.Orders;
 
             return View(orders);
@@ -125,6 +125,37 @@ namespace BitsandBytesCM.Controllers
 
         }
 
+        public ActionResult Edit(int id)
+        {
+
+            var orderDetails = _context.OrderDetails.SingleOrDefault(o => o.OrderDetailId == id);
+            
+
+            if (orderDetails == null)
+                return HttpNotFound();
+
+            var viewModel = new EditQuantityViewModel
+            {
+                OrderDetails = orderDetails
+
+                
+            };
+
+            return View("Edit", viewModel);
+        }
+
+
+        public ActionResult EditQuantity(OrderDetail orderDetails)
+        {
+            var product = _context.Products;
+            var orderDetailsInDb = _context.OrderDetails.Single(m => m.OrderDetailId == orderDetails.OrderDetailId);
+            orderDetailsInDb.Quantity = orderDetails.Quantity;
+            
+
+            _context.SaveChanges();
+
+            return RedirectToAction("ViewOrders", "order");
+        }
 
     }
 }

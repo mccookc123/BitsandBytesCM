@@ -1,0 +1,21 @@
+﻿@model BitsandBytesCM.ViewModels.EditQuantityViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Quantity</h2>
+
+
+
+@using (Html.BeginForm("EditQuantity", "Order"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.OrderDetails.Quantity)
+        @Html.TextBoxFor(m => m.OrderDetails.Quantity, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.OrderDetails.OrderDetailId)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
