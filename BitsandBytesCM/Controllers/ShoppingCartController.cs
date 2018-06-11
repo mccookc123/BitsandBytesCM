@@ -1,4 +1,14 @@
-﻿using BitsandBytesCM.Models;
+﻿// ***********************************************************************
+// Assembly         : BitsandBytesCM
+// Author           : Calum
+// Created          : 06-11-2018
+//
+// Last Modified By : Calum
+// Last Modified On : 06-04-2018
+// ***********************************************************************
+// <summary></summary>
+// ***********************************************************************
+using BitsandBytesCM.Models;
 using BitsandBytesCM.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
@@ -9,14 +19,25 @@ using System.Web.Mvc;
 
 namespace BitsandBytesCM.Controllers
 {
+    /// <summary>
+    /// Class ShoppingCartController.
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     public class ShoppingCartController : Controller
     {
 
+        /// <summary>
+        /// The application database
+        /// </summary>
         ApplicationDbContext appDB = new ApplicationDbContext();
 
-        
+
 
         // GET: ShoppingCart
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
         public ActionResult Index()
         {
 
@@ -34,6 +55,11 @@ namespace BitsandBytesCM.Controllers
 
         }
 
+        /// <summary>
+        /// Adds to cart.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
         public ActionResult AddToCart(int id)
         {
             //Retrieve the Product from the database
@@ -49,12 +75,22 @@ namespace BitsandBytesCM.Controllers
         }
 
 
+        /// <summary>
+        /// Deletes the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
         public ActionResult Delete(int id)
         {
             Cart cart = appDB.Carts.Find(id);
             return View(cart);
         }
 
+        /// <summary>
+        /// Deletes the confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -93,6 +129,10 @@ namespace BitsandBytesCM.Controllers
             return Json(results);
         }
         */
+        /// <summary>
+        /// Carts the summary.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
         [ChildActionOnly]
         public ActionResult CartSummary()
         {

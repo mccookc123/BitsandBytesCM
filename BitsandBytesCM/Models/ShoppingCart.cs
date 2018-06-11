@@ -1,4 +1,14 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : BitsandBytesCM
+// Author           : Calum
+// Created          : 06-11-2018
+//
+// Last Modified By : Calum
+// Last Modified On : 06-11-2018
+// ***********************************************************************
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,19 +17,41 @@ using Microsoft.AspNet.Identity;
 
 namespace BitsandBytesCM.Models
 {
+    /// <summary>
+    /// Class ShoppingCart.
+    /// </summary>
     public partial class ShoppingCart
     {
 
+        /// <summary>
+        /// The application database
+        /// </summary>
         ApplicationDbContext appDB = new ApplicationDbContext();
+        /// <summary>
+        /// Gets or sets the shopping cart identifier.
+        /// </summary>
+        /// <value>The shopping cart identifier.</value>
         string ShoppingCartId { get; set; }
+        /// <summary>
+        /// The cart session key
+        /// </summary>
         public const string CartSessionKey = "CartId";
 
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected void Dispose(bool disposing)
         {
             appDB.Dispose();
         }
 
+        /// <summary>
+        /// Gets the cart.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <returns>ShoppingCart.</returns>
         public static ShoppingCart GetCart(HttpContextBase context)
         {
             var cart = new ShoppingCart();
@@ -27,11 +59,20 @@ namespace BitsandBytesCM.Models
             return cart;
         }
         //Helper method to simplify shopping cart calls
+        /// <summary>
+        /// Gets the cart.
+        /// </summary>
+        /// <param name="controller">The controller.</param>
+        /// <returns>ShoppingCart.</returns>
         public static ShoppingCart GetCart(Controller controller)
         {
             return GetCart(controller.HttpContext);
         }
 
+        /// <summary>
+        /// Adds to cart.
+        /// </summary>
+        /// <param name="product">The product.</param>
         public void AddToCart(Product product)
         {
             //Get the matching cart and product instances
@@ -64,6 +105,11 @@ namespace BitsandBytesCM.Models
             appDB.SaveChanges();
         }
 
+        /// <summary>
+        /// Removes from cart.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>System.Int32.</returns>
         public int RemoveFromCart(int id)
         {
 
@@ -90,6 +136,9 @@ namespace BitsandBytesCM.Models
             return itemCount;
         }
 
+        /// <summary>
+        /// Empties the cart.
+        /// </summary>
         public void EmptyCart()
         {
 
@@ -104,6 +153,10 @@ namespace BitsandBytesCM.Models
             appDB.SaveChanges();
         }
 
+        /// <summary>
+        /// Gets the cart items.
+        /// </summary>
+        /// <returns>List&lt;Cart&gt;.</returns>
         public List<Cart> GetCartItems()
         {
 
@@ -123,7 +176,7 @@ namespace BitsandBytesCM.Models
 
             return cartToReturn;
         }
-        
+
         /*public Product GetProduct(int id)
         {
 
@@ -133,6 +186,10 @@ namespace BitsandBytesCM.Models
 
         }
         */
+        /// <summary>
+        /// Gets the count.
+        /// </summary>
+        /// <returns>System.Int32.</returns>
         public int GetCount()
         {
             //Get the count of each item in the cart and sum them up
@@ -141,6 +198,10 @@ namespace BitsandBytesCM.Models
             //Return 0 if all enteries are null
             return count ?? 0;
         }
+        /// <summary>
+        /// Gets the total.
+        /// </summary>
+        /// <returns>System.Double.</returns>
         public double GetTotal()
         {
             //Multiply album price by count lof that album to get
@@ -150,6 +211,11 @@ namespace BitsandBytesCM.Models
 
             return total ?? 0.0;
         }
+        /// <summary>
+        /// Creates the order.
+        /// </summary>
+        /// <param name="order">The order.</param>
+        /// <returns>System.Int32.</returns>
         public int CreateOrder(Order order)
         {
             double orderTotal = 0.0;
@@ -185,6 +251,11 @@ namespace BitsandBytesCM.Models
         }
 
         //We're using HttpContextBase to allow access to cookies.
+        /// <summary>
+        /// Gets the cart identifier.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <returns>System.String.</returns>
         public string GetCartId(HttpContextBase context)
         {
 
@@ -213,6 +284,10 @@ namespace BitsandBytesCM.Models
 
         //When a user has logged in, migrate their shopping cart to
         //be associated with their username
+        /// <summary>
+        /// Migrates the cart.
+        /// </summary>
+        /// <param name="username">The username.</param>
         public void MigrateCart(string username)
         {
 
