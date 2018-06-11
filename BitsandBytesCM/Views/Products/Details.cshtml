@@ -1,0 +1,32 @@
+﻿
+@model BitsandBytesCM.Models.Product
+@{
+    ViewBag.Title = "Product - " + Model.ProductDescription;
+}
+<h2>@Model.ProductDescription</h2>
+
+<div id="album-details">
+    <p>
+        <em>Product Name:</em>
+        @Model.ProductDescription
+    </p>
+    <p>
+        <em>Colour:</em>
+        @Model.ProductColour
+    </p>
+    <p>
+        <em>Price:</em>
+        @String.Format("{0:F}",
+          Model.ProductPrice)
+    </p>
+    <p>
+        <em>Quantity in Stock:</em>
+        @String.Format("{0:F}",
+          Model.CurrentStock)
+    </p>
+    <p class="button">
+        @Html.ActionLink("Add to cart", "AddToCart",
+
+                  "ShoppingCart", new { id = Model.ProductID }, "")
+    </p>
+</div>

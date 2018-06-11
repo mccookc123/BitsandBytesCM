@@ -1,0 +1,40 @@
+﻿
+@model IEnumerable<BitsandBytesCM.Models.Product>
+@{
+    ViewBag.Title = "ModifyProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ModifyProduct</h2>
+
+<p>
+    @Html.ActionLink("New Product", "New", "Products", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Description</th>
+            <th>Product Colour</th>
+            <th>Product Price</th>
+            <th>Current Stock</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var product in Model)
+        {
+            <tr>
+
+                <td>@Html.ActionLink(product.ProductID.ToString(), "Edit", "Products", new { id = product.ProductID }, null)</td>
+                <td>@Html.ActionLink(product.ProductDescription, "Edit", "Products", new { id = product.ProductID }, null)</td>
+                <td>@Html.ActionLink(product.ProductColour, "Edit", "Products", new { id = product.ProductID }, null)</td>
+                <td>@Html.ActionLink(product.ProductPrice.ToString(), "Edit", "Products", new { id = product.ProductID }, null)</td>
+                <td>@Html.ActionLink(product.CurrentStock.ToString(), "Edit", "Products", new { id = product.ProductID }, null)</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = product.ProductID })</td>
+
+            </tr>
+        }
+    </tbody>
+</table>

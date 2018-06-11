@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BitsandBytesCM.Models.Order>
+@{
+    ViewBag.Title = "ViewOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Orders</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Order Date</th>
+            <th>Order Total</th>
+            <th>Cancel</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var order in Model)
+        {
+        <tr>
+
+            <td>@Html.ActionLink(order.OrderDate.ToString(), "ViewOrderDetails", "Order", new { id = order.OrderId }, null)</td>
+            <td>@order.OrderTotal</td>
+            <td>@Html.ActionLink("Cancel Order", "Delete", new { id = order.OrderId})</td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+

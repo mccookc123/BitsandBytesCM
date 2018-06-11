@@ -1,0 +1,35 @@
+﻿@model BitsandBytesCM.ViewModels.ProductFormViewModel
+@{
+                /**/
+
+                ViewBag.Title = Model.Title;
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Products"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.ProductDescription)
+        @Html.TextBoxFor(m => m.Product.ProductDescription, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.ProductColour)
+        @Html.TextBoxFor(m => m.Product.ProductColour, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.ProductPrice)
+        @Html.TextBoxFor(m => m.Product.ProductPrice, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.CurrentStock)
+        @Html.TextBoxFor(m => m.Product.CurrentStock, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.lowestStockLimit)
+        @Html.TextBoxFor(m => m.Product.lowestStockLimit, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.Product.ProductID)
+    <button type="submit" class="btn btn-primary">Save</button>
+}

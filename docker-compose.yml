@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  bitsandbytescm:
+    image: bitsandbytescm
+    build:
+      context: .\BitsandBytesCM
+      dockerfile: Dockerfile

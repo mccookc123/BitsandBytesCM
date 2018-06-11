@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BitsandBytesCM.Models.Product>
+
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Browse Products</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Description</th>
+            <th>Product Colour</th>
+            <th>Product Price</th>
+            <th>Current Stock</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var product in Model)
+        {
+        <tr>
+
+            <td>@product.ProductID.ToString()</td>
+            <td>@product.ProductDescription</td>
+            <td>@product.ProductColour</td>
+            <td>@product.ProductPrice.ToString()</td>
+            <td>@product.CurrentStock.ToString()</td>
+            <td>@Html.ActionLink("Details", "Details", new { id = product.ProductID })</td>
+
+        </tr>
+        }
+    </tbody>
+</table>

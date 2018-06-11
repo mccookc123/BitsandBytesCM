@@ -1,0 +1,17 @@
+﻿@model BitsandBytesCM.Models.Order
+@{
+    ViewBag.Title = "Checkout Confirmation";
+}
+
+<h2>Checkout Confirmation</h2>
+<p>
+    If you would like to change the shipping address please modify your address in your account settings.
+</p>
+
+<p>
+    Are you sure you want to complete the order?
+</p>
+@using (Html.BeginForm("CreateOrder", "Checkout"))
+{
+<button type="submit" class="btn btn-primary" value="CartTotal">Create Order</button>
+}

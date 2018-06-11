@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BitsandBytesCM.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "ViewOrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Order Details</h2>
+
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Description</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+
+        </tr>
+        <tr></tr>
+    </thead>
+    <tbody>
+
+        @foreach (var orderDetails in Model)
+        {
+            <tr>
+
+                <td>@orderDetails.ProductId</td>
+                <td>@orderDetails.Product.ProductDescription</td>
+                <td>@orderDetails.Quantity</td>
+                <td>@orderDetails.UnitPrice</td>
+            </tr>
+        }
+    </tbody>
+</table>
